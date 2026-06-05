@@ -712,7 +712,7 @@ canvas{display:block;width:100%!important;max-height:260px}
         <input class="inp" id="inp-chofer" placeholder="Nombre completo..." maxlength="60">
       </div>
       <div class="igrp">
-        <label>Placas del Vehículo</label>
+        <label>Tarjeta Asignada</label>
         <input class="inp" id="inp-placas" placeholder="ABC-1234..." maxlength="20" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()">
       </div>
     </div>
@@ -1235,7 +1235,7 @@ window.okSalida = id => {
   document.getElementById('confirm-detail').innerHTML = `
     <div class="cd-row"><span class="cd-lbl">ORDEN</span><span class="cd-val">#${r.orden}</span></div>
     <div class="cd-row"><span class="cd-lbl">CHOFER</span><span class="cd-val">${r.chofer}</span></div>
-    <div class="cd-row"><span class="cd-lbl">PLACAS</span><span class="cd-val">${r.placas}</span></div>
+    <div class="cd-row"><span class="cd-lbl">Tarjeta Asignada</span><span class="cd-val">${r.placas}</span></div>
     <div class="cd-row"><span class="cd-lbl">RAMPAS</span><span class="cd-val">${rampaStr}</span></div>
     <div class="cd-row"><span class="cd-lbl">ENTRÓ</span><span class="cd-val">${r.fecha} ${r.hora}</span></div>
     <div class="cd-row"><span class="cd-lbl">SUPERVISOR</span><span class="cd-val">${r.supervisor}</span></div>
