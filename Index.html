@@ -103,37 +103,127 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .card-opt.ca.sel{border-color:var(--yellow);background:var(--yellow-bg);color:var(--yellow);box-shadow:0 0 20px rgba(245,168,0,.2)}
 .card-opt.ca.sel::after{content:'✓';position:absolute;top:8px;right:10px;font-size:14px;color:var(--yellow)}
 
-/* RAMPAS — botones combinados R + RE */
-.rampa-grid{display:flex;gap:10px;flex-wrap:wrap}
-.rampa-slot{display:flex;flex-direction:column;align-items:center;gap:3px}
-.rampa-mins{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.5px;height:13px;line-height:13px;display:flex;gap:5px}
+/* ══ RAMPAS — diseño premium ══ */
+.rampa-slot{display:flex;flex-direction:column;align-items:center;gap:5px}
+.rampa-mins{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.5px;height:14px;line-height:14px;display:flex;gap:5px}
 .rampa-mins .m-emb{color:var(--green)}
 .rampa-mins .m-rec{color:var(--tp-sky)}
 
-/* Botón doble: mitad izquierda=Embarques, mitad derecha=Recibo */
-.btn-dual{width:130px;height:100px;border-radius:var(--r);border:2px solid var(--border2);
+/* ── Botón Embarques ── */
+.btn-solo-emb{
+  width:100px;height:90px;
+  border-radius:12px;
+  border:2px solid rgba(0,192,122,.45);
+  background:linear-gradient(160deg,rgba(0,192,122,.13) 0%,rgba(0,192,122,.05) 100%);
+  cursor:pointer;
+  transition:all .2s cubic-bezier(.25,.8,.25,1);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:5px;padding:0;position:relative;overflow:hidden;
+  box-shadow:0 2px 10px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.btn-solo-emb::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(160deg,rgba(0,192,122,.18),transparent 60%);
+  opacity:0;transition:opacity .2s;border-radius:10px;
+}
+.btn-solo-emb:hover::before{opacity:1}
+.btn-solo-emb:hover{
+  border-color:rgba(0,192,122,.8);
+  box-shadow:0 4px 18px rgba(0,192,122,.25), inset 0 1px 0 rgba(255,255,255,.08);
+  transform:translateY(-2px);
+}
+.btn-solo-emb:active{transform:translateY(0);box-shadow:0 1px 6px rgba(0,0,0,.3)}
+
+/* ── Botón Recibo ── */
+.btn-solo-rec{
+  width:100px;height:90px;
+  border-radius:12px;
+  border:2px solid rgba(0,91,170,.5);
+  background:linear-gradient(160deg,rgba(0,91,170,.18) 0%,rgba(0,91,170,.07) 100%);
+  cursor:pointer;
+  transition:all .2s cubic-bezier(.25,.8,.25,1);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:5px;padding:0;position:relative;overflow:hidden;
+  box-shadow:0 2px 10px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.btn-solo-rec::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(160deg,rgba(0,133,202,.22),transparent 60%);
+  opacity:0;transition:opacity .2s;border-radius:10px;
+}
+.btn-solo-rec:hover::before{opacity:1}
+.btn-solo-rec:hover{
+  border-color:rgba(0,133,202,.9);
+  box-shadow:0 4px 18px rgba(0,91,170,.3), inset 0 1px 0 rgba(255,255,255,.08);
+  transform:translateY(-2px);
+}
+.btn-solo-rec:active{transform:translateY(0);box-shadow:0 1px 6px rgba(0,0,0,.3)}
+
+/* ── Btn dual legacy (compat) ── */
+.btn-dual{width:96px;height:66px;border-radius:var(--r);border:2px solid var(--border2);
   background:var(--surface);cursor:pointer;transition:all .15s;
   display:flex;overflow:hidden;position:relative;padding:0}
-.btn-dual:hover .bdr-emb:not(.oc-emb){background:rgba(0,192,122,.18)}
-.btn-dual:hover .bdr-rec:not(.oc-rec){background:rgba(0,91,170,.22)}
-/* halves */
-.bdr-emb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:1px;border-right:1px solid var(--border2);transition:background .15s;
-  background:rgba(0,192,122,.07);color:var(--green)}
-.bdr-rec{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:1px;transition:background .15s;
-  background:rgba(0,91,170,.1);color:rgba(100,180,255,.9)}
-/* labels inside */
-.bdr-lbl{font-family:var(--mono);font-size:20px;font-weight:900;line-height:1}
-.bdr-sub{font-size:11px;letter-spacing:1.2px;opacity:1;line-height:1;font-weight:800}
-/* states */
-.bdr-emb.free{background:rgba(0,192,122,.12);color:var(--green)}
-.bdr-emb.oc-emb{background:rgba(217,48,37,.15);color:var(--red)}
-.bdr-rec.free{background:rgba(0,91,170,.14);color:rgba(130,200,255,.95)}
-.bdr-rec.oc-rec{background:rgba(217,48,37,.13);color:var(--red)}
-/* selected state */
-.bdr-emb.sel-emb{background:var(--green) !important;color:#000 !important;box-shadow:0 0 15px var(--green), inset 0 0 0 2px #fff}
-.bdr-rec.sel-rec{background:var(--accent2) !important;color:#000 !important;box-shadow:0 0 15px var(--accent2), inset 0 0 0 2px #fff}
+
+/* ── Contenido interno ── */
+.bdr-emb{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;transition:all .2s;width:100%;height:100%;
+  color:var(--green);
+}
+.bdr-rec{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;transition:all .2s;width:100%;height:100%;
+  color:rgba(100,190,255,.95);
+}
+/* Número grande */
+.bdr-lbl{
+  font-family:var(--mono);font-size:20px;font-weight:700;line-height:1;
+  letter-spacing:-.5px;
+}
+/* Etiqueta EMB / REC */
+.bdr-sub{
+  font-size:10px;font-weight:700;letter-spacing:2px;opacity:.7;line-height:1;
+  font-family:var(--font);
+}
+
+/* ── Estado: libre ── */
+.bdr-emb.free{color:var(--green)}
+.bdr-rec.free{color:rgba(120,195,255,.95)}
+
+/* ── Estado: ocupada ── */
+.btn-solo-emb:has(.bdr-emb.oc-emb),
+.btn-solo-rec:has(.bdr-rec.oc-rec){
+  border-color:rgba(217,48,37,.6);
+  background:linear-gradient(160deg,rgba(217,48,37,.18) 0%,rgba(217,48,37,.07) 100%);
+  box-shadow:0 2px 10px rgba(217,48,37,.2);
+  cursor:default;
+}
+.bdr-emb.oc-emb{color:var(--red)}
+.bdr-rec.oc-rec{color:var(--red)}
+
+/* ── Estado: SELECCIONADA — se nota oscuro y con glow ── */
+.btn-solo-emb:has(.bdr-emb.sel-emb){
+  border-color:#00e090 !important;
+  background:linear-gradient(160deg,rgba(0,192,122,.55) 0%,rgba(0,150,90,.35) 100%) !important;
+  box-shadow:0 0 0 3px rgba(0,192,122,.4), 0 4px 22px rgba(0,192,122,.45) !important;
+  transform:translateY(-2px);
+}
+.bdr-emb.sel-emb{
+  color:#fff !important;
+}
+.bdr-emb.sel-emb .bdr-lbl{text-shadow:0 0 14px rgba(0,255,150,.6)}
+
+.btn-solo-rec:has(.bdr-rec.sel-rec){
+  border-color:#40c4ff !important;
+  background:linear-gradient(160deg,rgba(0,91,170,.65) 0%,rgba(0,60,130,.45) 100%) !important;
+  box-shadow:0 0 0 3px rgba(0,133,202,.45), 0 4px 22px rgba(0,91,170,.5) !important;
+  transform:translateY(-2px);
+}
+.bdr-rec.sel-rec{
+  color:#fff !important;
+}
+.bdr-rec.sel-rec .bdr-lbl{text-shadow:0 0 14px rgba(80,180,255,.7)}
+
 /* btn-r kept for backward compat (not used in grid anymore) */
 .btn-r{width:66px;height:66px;border-radius:var(--r);border:2px solid var(--border2);background:var(--surface);color:var(--text2);font-family:var(--mono);font-size:15px;font-weight:600;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
 .btn-r:hover:not(.occupied){border-color:var(--tp-sky);color:var(--accent2)}
@@ -465,10 +555,10 @@ canvas{display:block;width:100%!important;max-height:260px}
 .toast.show{transform:translateY(0);opacity:1}
 .toast.ok-t{background:var(--green);color:#001f10}
 .toast.err-t{background:var(--red);color:#fff}
-.btn-r-edit{width:65px;height:55px;border-radius:6px;border:2px solid var(--border2);background:var(--surface);color:var(--text2);font-family:var(--mono);font-size:16px;font-weight:700;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px}
-.btn-r-edit .r-sub{font-size:10px;letter-spacing:.5px;opacity:.9;font-weight:700}
+.btn-r-edit{width:52px;height:46px;border-radius:6px;border:2px solid var(--border2);background:var(--surface);color:var(--text2);font-family:var(--mono);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px}
+.btn-r-edit .r-sub{font-size:8px;letter-spacing:.3px;opacity:.6}
 .btn-r-edit:hover:not(.oc-edit){border-color:var(--tp-sky);color:var(--accent2)}
-.btn-r-edit.sel-edit{background:var(--tp-blue) !important;border-color:var(--accent2) !important;color:#fff !important;box-shadow:0 0 15px var(--tp-blue), inset 0 0 0 2px #fff}
+.btn-r-edit.sel-edit{background:var(--tp-blue) !important;border-color:var(--accent2) !important;color:#fff !important;box-shadow:0 0 0 3px rgba(0,133,202,.4)}
 .btn-r-edit.oc-edit{border-color:rgba(217,48,37,.4);background:rgba(217,48,37,.08);color:rgba(217,48,37,.7);cursor:default;font-size:11px}
 .btn-r-edit.espera-edit{border-color:var(--orange);background:rgba(232,101,10,.15);color:var(--orange)}
 .tag.espera{background:rgba(232,101,10,.15);color:var(--orange);border:1px solid rgba(232,101,10,.5);font-size:13px;padding:5px 16px;animation:bk .9s infinite alternate}
@@ -572,7 +662,7 @@ canvas{display:block;width:100%!important;max-height:260px}
         <div style="display:flex;gap:7px;flex-wrap:wrap" id="edit-rampas-emb"></div>
       </div>
       <div>
-        <div style="font-size:10px;font-weight:600;letter-spacing:1px;color:rgba(100,180,255,.9);text-transform:uppercase;margin-bottom:7px">Recibo (R1–R8)</div>
+        <div style="font-size:10px;font-weight:600;letter-spacing:1px;color:rgba(100,180,255,.9);text-transform:uppercase;margin-bottom:7px">Recibo (R3, R5–R8)</div>
         <div style="display:flex;gap:7px;flex-wrap:wrap" id="edit-rampas-rec"></div>
       </div>
     </div>
@@ -661,24 +751,46 @@ canvas{display:block;width:100%!important;max-height:260px}
   <div class="scard">
     <div class="scard-title" style="justify-content:space-between">
       <span style="display:flex;align-items:center;gap:8px"><span style="width:3px;height:13px;background:var(--tp-sky);border-radius:2px;display:inline-block"></span>Asignación de Rampas</span>
-      <span style="display:flex;gap:24px;font-size:14px;font-weight:700;letter-spacing:1px;flex-wrap:wrap;background:rgba(0,0,0,0.2);padding:8px 16px;border-radius:8px;border:1px solid var(--border)">
-        <span style="color:var(--green);display:flex;align-items:center;gap:8px">
-          <span style="width:16px;height:16px;background:rgba(0,192,122,.25);border:2px solid var(--green);border-radius:3px;display:inline-block"></span>
-          IZQ = EMBARQUES (RE1–RE9)
+      <span style="display:flex;gap:16px;font-size:10px;font-weight:600;letter-spacing:.5px;flex-wrap:wrap">
+        <span style="color:var(--green);display:flex;align-items:center;gap:5px">
+          <span style="width:12px;height:12px;background:rgba(0,192,122,.25);border:2px solid var(--green);border-radius:2px;display:inline-block"></span>
+          Izq = Embarques (RE1–RE9)
         </span>
-        <span style="color:var(--accent2);display:flex;align-items:center;gap:8px">
-          <span style="width:16px;height:16px;background:rgba(0,91,170,.3);border:2px solid var(--accent2);border-radius:3px;display:inline-block"></span>
-          DER = RECIBO (R1–R8)
+        <span style="color:rgba(100,180,255,.9);display:flex;align-items:center;gap:5px">
+          <span style="width:12px;height:12px;background:rgba(0,91,170,.3);border:2px solid var(--tp-sky);border-radius:2px;display:inline-block"></span>
+          Der = Recibo (R1–R8)
         </span>
-        <span style="color:var(--red);display:flex;align-items:center;gap:8px">
-          <span style="width:16px;height:16px;background:rgba(217,48,37,.15);border:2px solid var(--red);border-radius:3px;display:inline-block"></span>
-          OCUPADA
+        <span style="color:var(--red);display:flex;align-items:center;gap:5px">
+          <span style="width:12px;height:12px;background:rgba(217,48,37,.15);border:2px solid var(--red);border-radius:2px;display:inline-block"></span>
+          Ocupada
         </span>
       </span>
     </div>
-    <div style="display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap">
-      <div class="rampa-grid" id="rampa-grid" style="flex:1"></div>
-      <!-- Botón rampa provisional de espera junto a las rampas -->
+    <!-- Contenedor con dos paneles separados -->
+    <div style="display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap">
+
+      <!-- ═══ PANEL EMBARQUES ═══ -->
+      <div style="background:rgba(0,192,122,.05);border:1.5px solid rgba(0,192,122,.25);border-radius:10px;padding:14px 16px;flex:1;min-width:280px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:7px">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block"></span>
+          EMBARQUES — RE1 a RE9
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap" id="rampa-grid"></div>
+      </div>
+
+      <!-- ═══ SEPARADOR ═══ -->
+      <div style="width:1px;background:var(--border2);align-self:stretch;min-height:100px;margin:0 2px;opacity:.5"></div>
+
+      <!-- ═══ PANEL RECIBO ═══ -->
+      <div style="background:rgba(0,91,170,.06);border:1.5px solid rgba(0,91,170,.3);border-radius:10px;padding:14px 16px;min-width:200px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(100,180,255,.9);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:7px">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--tp-sky);display:inline-block"></span>
+          RECIBO — R3, R5 a R8
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap" id="rampa-recibo-grid-vis"></div>
+      </div>
+
+      <!-- Botón espera provisional -->
       <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:18px">
         <button class="btn-main" id="btn-espera-form"
           onclick="toggleEsperaForm()"
@@ -712,7 +824,7 @@ canvas{display:block;width:100%!important;max-height:260px}
         <input class="inp" id="inp-chofer" placeholder="Nombre completo..." maxlength="60">
       </div>
       <div class="igrp">
-        <label>Tarjeta Asignada</label>
+        <label>Placas del Vehículo</label>
         <input class="inp" id="inp-placas" placeholder="ABC-1234..." maxlength="20" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()">
       </div>
     </div>
@@ -964,77 +1076,75 @@ function startClock() {
   setInterval(tick, 1000);
 }
 
-// ── RAMPAS COMBINADAS (R + RE en el mismo botón) ──
+// ── RAMPAS EMBARQUES (RE1–RE9) en panel izquierdo ──
 function setupRampas() {
   const g = document.getElementById('rampa-grid');
   g.innerHTML = '';
-  // RE (Recibo) = R1-R8 only; RE (Embarques) = RE1-RE9
-  // Button layout: left half = Embarques (RE1-RE9), right half = Recibo (R1-R8)
   for (let i = 1; i <= 9; i++) {
-    const hasRecibo = i <= 8; // Recibo only has R1-R8
     const slot = document.createElement('div');
     slot.className = 'rampa-slot';
-    slot.innerHTML = `<div class="rampa-mins"><span class="m-emb" id="assign-mins-${i}"></span>${hasRecibo ? `<span class="m-rec" id="assign-rec-mins-${i}"></span>` : ''}</div>`;
+    slot.innerHTML = `<div class="rampa-mins"><span class="m-emb" id="assign-mins-${i}"></span></div>`;
     const btn = document.createElement('button');
-    btn.className = 'btn-dual';
+    btn.className = 'btn-solo-emb';
     btn.id = `btn-dual-${i}`;
-    if (hasRecibo) {
-      btn.innerHTML = `
-        <div class="bdr-emb free" id="bdr-emb-${i}">
-          <span class="bdr-lbl">RE${i}</span>
-          <span class="bdr-sub">EMB</span>
-        </div>
-        <div class="bdr-rec free" id="bdr-rec-${i}">
-          <span class="bdr-lbl">R${i}</span>
-          <span class="bdr-sub">REC</span>
-        </div>
-      `;
-      btn.addEventListener('click', e => {
-        const rect = btn.getBoundingClientRect();
-        const isLeft = (e.clientX - rect.left) < rect.width / 2;
-        if (isLeft) pickRampa(i);
-        else pickRampaRecibo(i);
-      });
-    } else {
-      // RE9 — only embarques half
-      btn.style.width = '50px';
-      btn.innerHTML = `
-        <div class="bdr-emb free" id="bdr-emb-${i}" style="flex:1;border-right:none">
-          <span class="bdr-lbl">RE${i}</span>
-          <span class="bdr-sub">EMB</span>
-        </div>
-      `;
-      btn.addEventListener('click', () => pickRampa(i));
-    }
+    btn.innerHTML = `
+      <div class="bdr-emb free" id="bdr-emb-${i}">
+        <span class="bdr-lbl">RE${i}</span>
+        <span class="bdr-sub">EMBARQUES</span>
+      </div>
+    `;
+    btn.addEventListener('click', () => pickRampa(i));
     slot.appendChild(btn);
     const lbl = document.createElement('div');
-    lbl.style.cssText = 'font-size:9px;color:var(--text3);letter-spacing:.5px;text-align:center;line-height:1.3';
-    lbl.innerHTML = hasRecibo
-      ? `<span style="color:var(--green)">RE${i}</span>·<span style="color:rgba(100,180,255,.8)">R${i}</span>`
-      : `<span style="color:var(--green)">RE${i}</span>`;
+    lbl.style.cssText = 'font-size:10px;font-weight:600;color:rgba(0,192,122,.7);letter-spacing:.5px;text-align:center';
+    lbl.textContent = `RE${i}`;
     slot.appendChild(lbl);
     g.appendChild(slot);
   }
 }
 
-// ── RAMPAS RECIBO legacy setup — hidden, not needed ──
+// ── RAMPAS RECIBO (R3, R5–R8) en panel derecho ──
+// R1, R2, R4 eliminadas — no se usan
+const RECIBO_RAMPAS = [3, 5, 6, 7, 8];
+
 function setupRampaRecibo() {
-  // Kept for compatibility — actual RE buttons are in the dual buttons above
-  const g = document.getElementById('rampa-recibo-grid');
-  if (g) g.innerHTML = '';
+  const g = document.getElementById('rampa-recibo-grid-vis');
+  if (!g) return;
+  g.innerHTML = '';
+  RECIBO_RAMPAS.forEach(i => {
+    const slot = document.createElement('div');
+    slot.className = 'rampa-slot';
+    slot.innerHTML = `<div class="rampa-mins"><span class="m-rec" id="assign-rec-mins-${i}"></span></div>`;
+    const btn = document.createElement('button');
+    btn.className = 'btn-solo-rec';
+    btn.id = `btn-rec-solo-${i}`;
+    btn.innerHTML = `
+      <div class="bdr-rec free" id="bdr-rec-${i}">
+        <span class="bdr-lbl">R${i}</span>
+        <span class="bdr-sub">RECIBO</span>
+      </div>
+    `;
+    btn.addEventListener('click', () => pickRampaRecibo(i));
+    slot.appendChild(btn);
+    const lbl = document.createElement('div');
+    lbl.style.cssText = 'font-size:10px;font-weight:600;color:rgba(100,180,255,.7);letter-spacing:.5px;text-align:center';
+    lbl.textContent = `R${i}`;
+    slot.appendChild(lbl);
+    g.appendChild(slot);
+  });
+  // Hidden legacy grid kept for JS compat
+  const legacy = document.getElementById('rampa-recibo-grid');
+  if (legacy) legacy.innerHTML = '';
 }
 
 function updateRampaStatus() {
   const activos = Object.values(registros).filter(r => r.estado === 'activo');
 
+  // ── Embarques RE1–RE9 ──
   for (let i = 1; i <= 9; i++) {
-    const embEl = document.getElementById(`bdr-emb-${i}`);   // Embarques = RE
-    const recEl = document.getElementById(`bdr-rec-${i}`);   // Recibo = R (only 1-8)
+    const embEl = document.getElementById(`bdr-emb-${i}`);
     const minsEmb = document.getElementById(`assign-mins-${i}`);
-    const minsRec = document.getElementById(`assign-rec-mins-${i}`);
     if (!embEl) continue;
-
-    // ── Embarques half (RE1–RE9) — stored as r.rampa ──
     const regEmb = activos.find(r => String(r.rampa) === String(i));
     const isSelEmb = selRampa == i;
     if (regEmb) {
@@ -1046,22 +1156,25 @@ function updateRampaStatus() {
       embEl.className = 'bdr-emb free' + (isSelEmb ? ' sel-emb' : '');
       if (minsEmb) minsEmb.textContent = '';
     }
-
-    // ── Recibo half (R1–R8) — stored as r.rampaRecibo ──
-    if (i <= 8 && recEl) {
-      const regRec = activos.find(r => String(r.rampaRecibo) === String(i));
-      const isSelRec = selRampaRecibo == i;
-      if (regRec) {
-        const mins = Math.floor((Date.now() - regRec.ts) / 60000);
-        const mStr = mins >= 60 ? `${Math.floor(mins/60)}h${mins%60}m` : `${mins}m`;
-        recEl.className = 'bdr-rec oc-rec' + (isSelRec ? ' sel-rec' : '');
-        if (minsRec) { minsRec.textContent = mStr; minsRec.style.color = mins>=240?'var(--red)':mins>=120?'var(--yellow)':'rgba(100,180,255,.9)'; }
-      } else {
-        recEl.className = 'bdr-rec free' + (isSelRec ? ' sel-rec' : '');
-        if (minsRec) minsRec.textContent = '';
-      }
-    }
   }
+
+  // ── Recibo R3, R5–R8 ──
+  RECIBO_RAMPAS.forEach(i => {
+    const recEl = document.getElementById(`bdr-rec-${i}`);
+    const minsRec = document.getElementById(`assign-rec-mins-${i}`);
+    if (!recEl) return;
+    const regRec = activos.find(r => String(r.rampaRecibo) === String(i));
+    const isSelRec = selRampaRecibo == i;
+    if (regRec) {
+      const mins = Math.floor((Date.now() - regRec.ts) / 60000);
+      const mStr = mins >= 60 ? `${Math.floor(mins/60)}h${mins%60}m` : `${mins}m`;
+      recEl.className = 'bdr-rec oc-rec' + (isSelRec ? ' sel-rec' : '');
+      if (minsRec) { minsRec.textContent = mStr; minsRec.style.color = mins>=240?'var(--red)':mins>=120?'var(--yellow)':'rgba(100,180,255,.9)'; }
+    } else {
+      recEl.className = 'bdr-rec free' + (isSelRec ? ' sel-rec' : '');
+      if (minsRec) minsRec.textContent = '';
+    }
+  });
 }
 
 window.pickRampa = i => {
@@ -1235,7 +1348,7 @@ window.okSalida = id => {
   document.getElementById('confirm-detail').innerHTML = `
     <div class="cd-row"><span class="cd-lbl">ORDEN</span><span class="cd-val">#${r.orden}</span></div>
     <div class="cd-row"><span class="cd-lbl">CHOFER</span><span class="cd-val">${r.chofer}</span></div>
-    <div class="cd-row"><span class="cd-lbl">TARJETA ASIGNADA</span><span class="cd-val">${r.placas}</span></div>
+    <div class="cd-row"><span class="cd-lbl">PLACAS</span><span class="cd-val">${r.placas}</span></div>
     <div class="cd-row"><span class="cd-lbl">RAMPAS</span><span class="cd-val">${rampaStr}</span></div>
     <div class="cd-row"><span class="cd-lbl">ENTRÓ</span><span class="cd-val">${r.fecha} ${r.hora}</span></div>
     <div class="cd-row"><span class="cd-lbl">SUPERVISOR</span><span class="cd-val">${r.supervisor}</span></div>
@@ -2727,17 +2840,17 @@ window.abrirEditRampa = id => {
     embGrid.appendChild(btn);
   }
 
-  // Build recibo buttons R1–R8
+  // Build recibo buttons R3, R5–R8 (R1, R2, R4 eliminadas — no se usan)
   const recGrid = document.getElementById('edit-rampas-rec');
   recGrid.innerHTML = '';
-  for (let i = 1; i <= 8; i++) {
+  RECIBO_RAMPAS.forEach(i => {
     const oc = activos.find(([,rx]) => String(rx.rampaRecibo) === String(i));
     const btn = document.createElement('button');
     btn.className = 'btn-r-edit' + (editSelRec == i ? ' sel-edit' : '') + (oc ? ' oc-edit' : '');
     btn.innerHTML = `R${i}<span class="r-sub">REC</span>`;
     if (!oc) btn.onclick = () => { editSelRec = editSelRec == i ? null : i; renderEditPreview(); refreshEditRecBtns(); };
     recGrid.appendChild(btn);
-  }
+  });
 
   renderEditPreview();
   document.getElementById('edit-rampa-overlay').style.display = 'flex';
@@ -2754,7 +2867,7 @@ function refreshEditEmbBtns() {
 function refreshEditRecBtns() {
   const btns = document.querySelectorAll('#edit-rampas-rec .btn-r-edit');
   btns.forEach((btn, idx) => {
-    const i = idx + 1;
+    const i = RECIBO_RAMPAS[idx];
     if (!btn.classList.contains('oc-edit')) btn.classList.toggle('sel-edit', editSelRec == i);
   });
 }
